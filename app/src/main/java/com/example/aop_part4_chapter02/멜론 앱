@@ -1,0 +1,17 @@
+<멜론 앱>
+
+<ExoPlayer 사용하기>
+- Custom Controller
+- PlayList 등
+
+<androidx.constraintLayout.widget.Group>
+
+<SeekBar Custom 하기>
+
+- Retrofit 을 이용하여 재생목록을 받아와 구성함
+- 재생 목록을 클릭하여 ExoPlayer를 이용하여 음악을 재생할 수 있음
+- 이전, 다음 트랙 버튼을 눌러서 이전, 다음 음악으로 재생하고, Ui를 업데이트할 수 있음
+- PlayList 화면과 Player 화면 간의 전환을 할 수 있음
+- SeekBar를 Custom 하여 원하는 UI로 표시할 수 있음
+
+NCS 음악 사용 (저작권이 없는 음악)
