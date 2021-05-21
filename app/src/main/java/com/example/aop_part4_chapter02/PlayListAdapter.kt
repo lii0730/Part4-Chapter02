@@ -1,5 +1,7 @@
 package com.example.aop_part4_chapter02
 
+import android.graphics.Color
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,19 +11,29 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.aop_part4_chapter02.service.PlayListItem
 
-class PlayListAdapter : ListAdapter<PlayListItem, PlayListAdapter.ViewHolder>(diffUtil) {
+class PlayListAdapter(val onItemClicked : (MusicModel) -> Unit) : ListAdapter<MusicModel, PlayListAdapter.ViewHolder>(diffUtil) {
     inner class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView){
-        fun bind(item : PlayListItem) {
+        fun bind(item : MusicModel) {
             val titleTextView = itemView.findViewById<TextView>(R.id.titleTextView)
             val artistTextView = itemView.findViewById<TextView>(R.id.artistTextView)
             val thumbnailImageView : ImageView = itemView.findViewById(R.id.thumbnailImageView)
 
-            titleTextView.text = item.title
+            titleTextView.text = item.track
             artistTextView.text = item.artist
             Glide.with(thumbnailImageView.context)
-                .load(item.cover)
+                .load(Uri.parse(item.cover))
                 .into(thumbnailImageView)
+
+            if(item.isPlaying) {
+                itemView.setBackgroundColor(Color.GRAY)
+            } else {
+                itemView.setBackgroundColor(Color.TRANSPARENT)
+            }
+            itemView.setOnClickListener {
+                onItemClicked(item)
+            }
         }
     }
 
@@ -34,12 +46,12 @@ class PlayListAdapter : ListAdapter<PlayListItem, PlayListAdapter.ViewHolder>(di
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<PlayListItem>() {
-            override fun areItemsTheSame(oldItem: PlayListItem, newItem: PlayListItem): Boolean {
-                return oldItem == newItem
+        val diffUtil = object : DiffUtil.ItemCallback<MusicModel>() {
+            override fun areItemsTheSame(oldItem: MusicModel, newItem: MusicModel): Boolean {
+                return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: PlayListItem, newItem: PlayListItem): Boolean {
+            override fun areContentsTheSame(oldItem: MusicModel, newItem: MusicModel): Boolean {
                 return oldItem == newItem
             }
         }
