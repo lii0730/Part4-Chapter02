@@ -1,0 +1,151 @@
+{
+  "musics": [
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/937/shudder-1619172032-LyqUPFaNXD.mp3",
+      "track" : "Shudder",
+      "cover" : "https://ncs.io/static/web/img/no-artist.png",
+      "artist" : "EMM, Jim Yosef"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/936/royalty-1619082033-7RC2AlRdd1.mp3",
+      "track" : "Royalty",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/936/100x100/royalty-1619082030-xBgqGZWLw9.jpg",
+      "artist" : "Maestro Chives, Egzod"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/935/fall-to-my-grave-1618923636-WCpFpRuYHn.mp3",
+      "track" : "Fall To My Grave",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/935/100x100/fall-to-my-grave-1618923633-xbQww25tm5.jpg",
+      "artist" : "Silent Child, ruindkid, SVRRIC"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/934/who-doesnt-wanna-fall-in-love-1618581633-7CJsQIg5mD.mp3",
+      "track" : "Who doesn't wanna fall in love",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/934/325x325/who-doesnt-wanna-fall-in-love-1618581630-NqMVzwdcbo.jpg",
+      "artist" : "Veronica Bravo, Zeus X Crona"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/933/badniss-1618491636-ZXAKvq3LYz.mp3",
+      "track" : "Badniss",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/933/325x325/badniss-1618491632-ESTWL56MKy.jpg",
+      "artist" : "VinDon, Jonth"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/932/love-me-better-1618318833-wycPzeuCHV.mp3",
+      "track" : "Love Me Better",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/932/100x100/love-me-better-1618318830-IjpEZFmHvk.jpg",
+      "artist" : "Vizzen, Wiguez"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/931/1618477895_TEZZaF5piz_DISTO--Todd-Helder---DISTODD-NCS-Release.mp3",
+      "track" : "DISTODD",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/931/100x100/distodd-1617984032-ceWtCCWoZS.jpg",
+      "artist" : "Todd Helder"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/930/father-1617890434-x0Rv7yrVUM.mp3",
+      "track" : "Father",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/930/100x100/father-1617890431-eRH6q76Cag.jpg",
+      "artist" : "Diamond Eyes"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/937/shudder-1619172032-LyqUPFaNXD.mp3",
+      "track" : "Shudder",
+      "cover" : "https://ncs.io/static/web/img/no-artist.png",
+      "artist" : "EMM, Jim Yosef"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/936/royalty-1619082033-7RC2AlRdd1.mp3",
+      "track" : "Royalty",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/936/100x100/royalty-1619082030-xBgqGZWLw9.jpg",
+      "artist" : "Maestro Chives, Egzod"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/935/fall-to-my-grave-1618923636-WCpFpRuYHn.mp3",
+      "track" : "Fall To My Grave",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/935/100x100/fall-to-my-grave-1618923633-xbQww25tm5.jpg",
+      "artist" : "Silent Child, ruindkid, SVRRIC"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/934/who-doesnt-wanna-fall-in-love-1618581633-7CJsQIg5mD.mp3",
+      "track" : "Who doesn't wanna fall in love",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/934/325x325/who-doesnt-wanna-fall-in-love-1618581630-NqMVzwdcbo.jpg",
+      "artist" : "Veronica Bravo, Zeus X Crona"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/933/badniss-1618491636-ZXAKvq3LYz.mp3",
+      "track" : "Badniss",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/933/325x325/badniss-1618491632-ESTWL56MKy.jpg",
+      "artist" : "VinDon, Jonth"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/932/love-me-better-1618318833-wycPzeuCHV.mp3",
+      "track" : "Love Me Better",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/932/100x100/love-me-better-1618318830-IjpEZFmHvk.jpg",
+      "artist" : "Vizzen, Wiguez"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/931/1618477895_TEZZaF5piz_DISTO--Todd-Helder---DISTODD-NCS-Release.mp3",
+      "track" : "DISTODD",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/931/100x100/distodd-1617984032-ceWtCCWoZS.jpg",
+      "artist" : "Todd Helder"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/930/father-1617890434-x0Rv7yrVUM.mp3",
+      "track" : "Father",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/930/100x100/father-1617890431-eRH6q76Cag.jpg",
+      "artist" : "Diamond Eyes"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/937/shudder-1619172032-LyqUPFaNXD.mp3",
+      "track" : "Shudder",
+      "cover" : "https://ncs.io/static/web/img/no-artist.png",
+      "artist" : "EMM, Jim Yosef"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/936/royalty-1619082033-7RC2AlRdd1.mp3",
+      "track" : "Royalty",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/936/100x100/royalty-1619082030-xBgqGZWLw9.jpg",
+      "artist" : "Maestro Chives, Egzod"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/935/fall-to-my-grave-1618923636-WCpFpRuYHn.mp3",
+      "track" : "Fall To My Grave",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/935/100x100/fall-to-my-grave-1618923633-xbQww25tm5.jpg",
+      "artist" : "Silent Child, ruindkid, SVRRIC"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/934/who-doesnt-wanna-fall-in-love-1618581633-7CJsQIg5mD.mp3",
+      "track" : "Who doesn't wanna fall in love",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/934/325x325/who-doesnt-wanna-fall-in-love-1618581630-NqMVzwdcbo.jpg",
+      "artist" : "Veronica Bravo, Zeus X Crona"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/933/badniss-1618491636-ZXAKvq3LYz.mp3",
+      "track" : "Badniss",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/933/325x325/badniss-1618491632-ESTWL56MKy.jpg",
+      "artist" : "VinDon, Jonth"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/932/love-me-better-1618318833-wycPzeuCHV.mp3",
+      "track" : "Love Me Better",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/932/100x100/love-me-better-1618318830-IjpEZFmHvk.jpg",
+      "artist" : "Vizzen, Wiguez"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/931/1618477895_TEZZaF5piz_DISTO--Todd-Helder---DISTODD-NCS-Release.mp3",
+      "track" : "DISTODD",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/931/100x100/distodd-1617984032-ceWtCCWoZS.jpg",
+      "artist" : "Todd Helder"
+    },
+    {
+      "streamUrl" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/930/father-1617890434-x0Rv7yrVUM.mp3",
+      "track" : "Father",
+      "cover" : "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/000/930/100x100/father-1617890431-eRH6q76Cag.jpg",
+      "artist" : "Diamond Eyes"
+    }
+  ]
+
+}
+
+// TODO: https://run.mocky.io/v3/1c9a620b-0029-4c9f-9f77-77a1284c0de0
