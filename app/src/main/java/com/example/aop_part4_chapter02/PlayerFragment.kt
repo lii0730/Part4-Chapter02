@@ -2,10 +2,7 @@ package com.example.aop_part4_chapter02
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,7 +45,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player){
         fragmentPlayerBinding.playerView.player = player
 
         binding?.let { binding ->
-            player?.addListener(object : Player.Listener{
+            player.addListener(object : Player.Listener{
                 override fun onIsPlayingChanged(isPlaying: Boolean) {
                     super.onIsPlayingChanged(isPlaying)
                     if(isPlaying) {
@@ -63,18 +60,15 @@ class PlayerFragment : Fragment(R.layout.fragment_player){
 
     private fun initRecyclerView(fragmentPlayerBinding : FragmentPlayerBinding) {
         musicAdapter = PlayListAdapter(onItemClicked = { item ->
-            fragmentPlayerBinding.playListViewGroup.isVisible = !isWatchingPlayingListView
-            fragmentPlayerBinding.playerViewGroup.isVisible = isWatchingPlayingListView
 
-            isWatchingPlayingListView = !isWatchingPlayingListView
-
-            fragmentPlayerBinding.trackTextView.text = item.track
+            fragmentPlayerBinding.titleTextView.text = item.track
             fragmentPlayerBinding.artistTextView.text = item.artist
             Glide.with(fragmentPlayerBinding.coverImageView.context)
                 .load(item.cover)
                 .into(fragmentPlayerBinding.coverImageView)
 
             //TODO: 음악 재생 기능 추가
+
         })
 
         fragmentPlayerBinding.playListRecyclerView.apply {
@@ -107,6 +101,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player){
                         return
                     }
                     response.body()?.let {
+
+                        Log.i("getVideoList", it.toString())
+
                         val modelList = it.musics.mapIndexed { index, playListItem ->
                             playListItem.mapper(index.toLong())
                         }
@@ -115,7 +112,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player){
                 }
 
                 override fun onFailure(call: Call<MusicDTO>, t: Throwable) {
-
+                    Log.i("getVideoList", t.toString())
                 }
             })
         }

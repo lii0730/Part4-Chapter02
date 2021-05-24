@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/thumbnailImageView"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/artistTextView"
         app:layout_constraintStart_toEndOf="@+id/thumbnailImageView"
@@ -38,7 +38,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/gray_97"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

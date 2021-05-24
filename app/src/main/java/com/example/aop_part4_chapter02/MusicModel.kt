@@ -6,5 +6,5 @@ data class MusicModel(
     val artist : String,
     val streamUrl : String,
     val cover : String,
-    val isPlaying : Boolean = false
+    var isPlaying : Boolean = false
 )

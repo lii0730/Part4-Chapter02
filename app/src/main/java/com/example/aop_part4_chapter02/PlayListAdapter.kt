@@ -26,12 +26,15 @@ class PlayListAdapter(val onItemClicked : (MusicModel) -> Unit) : ListAdapter<Mu
                 .load(Uri.parse(item.cover))
                 .into(thumbnailImageView)
 
-            if(item.isPlaying) {
-                itemView.setBackgroundColor(Color.GRAY)
-            } else {
-                itemView.setBackgroundColor(Color.TRANSPARENT)
-            }
             itemView.setOnClickListener {
+
+                item.isPlaying = !item.isPlaying
+                if(item.isPlaying) {
+                    itemView.setBackgroundColor(Color.GRAY)
+                } else {
+                    itemView.setBackgroundColor(Color.TRANSPARENT)
+                }
+
                 onItemClicked(item)
             }
         }
