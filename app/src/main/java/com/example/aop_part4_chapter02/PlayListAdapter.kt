@@ -13,12 +13,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.aop_part4_chapter02.service.PlayListItem
 
-class PlayListAdapter(val onItemClicked : (MusicModel) -> Unit) : ListAdapter<MusicModel, PlayListAdapter.ViewHolder>(diffUtil) {
-    inner class ViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView){
-        fun bind(item : MusicModel) {
+class PlayListAdapter(val onItemClicked: (MusicModel) -> Unit) :
+    ListAdapter<MusicModel, PlayListAdapter.ViewHolder>(diffUtil) {
+
+    private var tmpView: View? = null
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        fun bind(item: MusicModel) {
             val titleTextView = itemView.findViewById<TextView>(R.id.titleTextView)
             val artistTextView = itemView.findViewById<TextView>(R.id.artistTextView)
-            val thumbnailImageView : ImageView = itemView.findViewById(R.id.thumbnailImageView)
+            val thumbnailImageView: ImageView = itemView.findViewById(R.id.thumbnailImageView)
 
             titleTextView.text = item.track
             artistTextView.text = item.artist
@@ -26,22 +31,35 @@ class PlayListAdapter(val onItemClicked : (MusicModel) -> Unit) : ListAdapter<Mu
                 .load(Uri.parse(item.cover))
                 .into(thumbnailImageView)
 
+
             itemView.setOnClickListener {
-
-                item.isPlaying = !item.isPlaying
-                if(item.isPlaying) {
+                if (tmpView == null) {
                     itemView.setBackgroundColor(Color.GRAY)
+                    tmpView = itemView
                 } else {
-                    itemView.setBackgroundColor(Color.TRANSPARENT)
+                    tmpView?.let {
+                        if (!it.equals(itemView)) {
+                            itemView.setBackgroundColor(Color.GRAY)
+                            it.setBackgroundColor(Color.TRANSPARENT)
+                            tmpView = itemView
+                        } else return@let
+                    }
                 }
-
+//                item.isPlaying = !item.isPlaying
+//                if(item.isPlaying) {
+//                    itemView.setBackgroundColor(Color.GRAY)
+//                } else {
+//                    itemView.setBackgroundColor(Color.TRANSPARENT)
+//                }
                 onItemClicked(item)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false))
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
