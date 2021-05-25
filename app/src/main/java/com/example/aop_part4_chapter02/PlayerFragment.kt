@@ -27,7 +27,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
     private var binding: FragmentPlayerBinding? = null
     private var model: PlayerModel = PlayerModel()
     private lateinit var player: SimpleExoPlayer
-
     private val updateSeekRunnable = Runnable {
         updateSeek()
     }
@@ -61,7 +60,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
     }
 
     private fun initSeekBar(fragmentPlayerBinding: FragmentPlayerBinding) {
-        fragmentPlayerBinding.playerSeekBar.setOnSeekBarChangeListener(object:SeekBar.OnSeekBarChangeListener{
+        fragmentPlayerBinding.playerSeekBar.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
             }
 
@@ -271,6 +271,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
 
     private fun playMusic(item: MusicModel) {
         //TODO: Player UI Binding
+
         model.updateCurrentPosition(item)
         player.seekTo(model.currentPosition, 0)
         player.play()
