@@ -40,36 +40,15 @@ class PlayListAdapter(val onItemClicked: (MusicModel) -> Unit) :
             }
 
             itemView.setOnClickListener {
-                tmp = MusicModel(item.id, item.track, item.artist, item.streamUrl, item.cover)
-                // onItemClicked 이후에 item 의 isPlaying 값이 변화
                 onItemClicked(item)
-                currentList.forEachIndexed { index, musicModel ->
-                    when (musicModel.id) {
-                        item.id -> {
-                            // 현재 클릭된 아이템
-                            notifyItemChanged(index, item)
-                        }
-                        else -> {
-                            return@forEachIndexed
-                        }
-                    }
-
-//                    if (musicModel.id.equals(item.id)) {
-//                        notifyItemChanged(index, item)
-//                        return@forEachIndexed
-//                    }
-                }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val holder: ViewHolder
-        holder = ViewHolder(
+        return ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false)
         )
-        holder.setIsRecyclable(false)
-        return holder
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
