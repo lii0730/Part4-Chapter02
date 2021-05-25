@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.aop_part4_chapter02.service.PlayListItem
 
 class PlayListAdapter(val onItemClicked: (MusicModel) -> Unit) :
     ListAdapter<MusicModel, PlayListAdapter.ViewHolder>(diffUtil) {
 
-    private var tmpView: View? = null
+    private lateinit var tmp: MusicModel
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         fun bind(item: MusicModel) {
+            //TODO 현재 클릭된 item 정보를 tmp에 저장
+
             val titleTextView = itemView.findViewById<TextView>(R.id.titleTextView)
             val artistTextView = itemView.findViewById<TextView>(R.id.artistTextView)
             val thumbnailImageView: ImageView = itemView.findViewById(R.id.thumbnailImageView)
@@ -32,34 +32,44 @@ class PlayListAdapter(val onItemClicked: (MusicModel) -> Unit) :
                 .into(thumbnailImageView)
 
 
+            //todo: 아이템 재생 상태를 바꾸고 notify 해주는 형태?
+            if (item.isPlaying) {
+                itemView.setBackgroundColor(Color.GRAY)
+            } else {
+                itemView.setBackgroundColor(Color.TRANSPARENT)
+            }
+
             itemView.setOnClickListener {
-                if (tmpView == null) {
-                    itemView.setBackgroundColor(Color.GRAY)
-                    tmpView = itemView
-                } else {
-                    tmpView?.let {
-                        if (!it.equals(itemView)) {
-                            itemView.setBackgroundColor(Color.GRAY)
-                            it.setBackgroundColor(Color.TRANSPARENT)
-                            tmpView = itemView
-                        } else return@let
-                    }
-                }
-//                item.isPlaying = !item.isPlaying
-//                if(item.isPlaying) {
-//                    itemView.setBackgroundColor(Color.GRAY)
-//                } else {
-//                    itemView.setBackgroundColor(Color.TRANSPARENT)
-//                }
+                tmp = MusicModel(item.id, item.track, item.artist, item.streamUrl, item.cover)
+                // onItemClicked 이후에 item 의 isPlaying 값이 변화
                 onItemClicked(item)
+                currentList.forEachIndexed { index, musicModel ->
+                    when (musicModel.id) {
+                        item.id -> {
+                            // 현재 클릭된 아이템
+                            notifyItemChanged(index, item)
+                        }
+                        else -> {
+                            return@forEachIndexed
+                        }
+                    }
+
+//                    if (musicModel.id.equals(item.id)) {
+//                        notifyItemChanged(index, item)
+//                        return@forEachIndexed
+//                    }
+                }
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
+        val holder: ViewHolder
+        holder = ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false)
         )
+        holder.setIsRecyclable(false)
+        return holder
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

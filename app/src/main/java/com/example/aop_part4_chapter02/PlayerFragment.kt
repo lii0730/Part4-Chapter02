@@ -1,6 +1,5 @@
 package com.example.aop_part4_chapter02
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -19,6 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Exception
 
 class PlayerFragment : Fragment(R.layout.fragment_player) {
 
@@ -27,7 +27,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
     private var isWatchingPlayingListView = true
     private lateinit var player: SimpleExoPlayer
     private var playList = listOf<MusicModel>()
-    private lateinit var tmpView : View
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -64,23 +63,18 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
     }
 
     private fun initRecyclerView(fragmentPlayerBinding: FragmentPlayerBinding) {
-        musicAdapter = PlayListAdapter(onItemClicked = { item ->
 
-            fragmentPlayerBinding.titleTextView.text = item.track
-            fragmentPlayerBinding.artistTextView.text = item.artist
-            Glide.with(fragmentPlayerBinding.coverImageView.context)
-                .load(item.cover)
-                .into(fragmentPlayerBinding.coverImageView)
+        try {
+            musicAdapter = PlayListAdapter { item ->
+                playMusic(item)
+            }
 
-            //TODO: 음악 재생 기능 추가 (현재 듣고 있는 음악일 경우엔 Pause 예외 처리)
-            fragmentPlayerBinding.playerView.player?.setMediaItem(MediaItem.fromUri(item.streamUrl))
-            fragmentPlayerBinding.playerView.player?.prepare()
-            fragmentPlayerBinding.playerView.player?.play()
-        })
-
-        fragmentPlayerBinding.playListRecyclerView.apply {
-            adapter = musicAdapter
-            layoutManager = LinearLayoutManager(context!!)
+            fragmentPlayerBinding.playListRecyclerView.apply {
+                adapter = musicAdapter
+                layoutManager = LinearLayoutManager(context!!)
+            }
+        } catch (e: Exception) {
+            Log.i("Error", e.toString())
         }
     }
 
@@ -97,7 +91,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
 
     private fun initPlayBottomControlButton(fragmentPlayerBinding: FragmentPlayerBinding) {
         fragmentPlayerBinding.playControlImageView.setOnClickListener {
-            if(fragmentPlayerBinding.playerView.player?.isPlaying!!){
+            if (fragmentPlayerBinding.playerView.player?.isPlaying!!) {
                 fragmentPlayerBinding.playerView.player?.pause()
             } else {
                 fragmentPlayerBinding.playerView.player?.play()
@@ -106,9 +100,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
 
         fragmentPlayerBinding.skipNextImageView.setOnClickListener {
             musicAdapter.currentList.forEachIndexed { index, musicModel ->
-                val tmp : MediaItem = MediaItem.fromUri(musicModel.streamUrl)
-                if(tmp.equals(fragmentPlayerBinding.playerView.player?.currentMediaItem)){
-                    val model : MusicModel = musicAdapter.currentList.get(index + 1)
+                val tmp: MediaItem = MediaItem.fromUri(musicModel.streamUrl)
+                if (tmp.equals(fragmentPlayerBinding.playerView.player?.currentMediaItem)) {
+                    val model: MusicModel = musicAdapter.currentList.get(index + 1)
                     fragmentPlayerBinding.playerView.player?.setMediaItem(MediaItem.fromUri(model.streamUrl))
                     fragmentPlayerBinding.playerView.player?.prepare()
                     fragmentPlayerBinding.playerView.player?.play()
@@ -125,8 +119,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
 
         fragmentPlayerBinding.skipPrevImageView.setOnClickListener {
             musicAdapter.currentList.forEachIndexed { index, musicModel ->
-                val tmp : MediaItem = MediaItem.fromUri(musicModel.streamUrl)
-                if(tmp.equals(fragmentPlayerBinding.playerView.player?.currentMediaItem)) {
+                val tmp: MediaItem = MediaItem.fromUri(musicModel.streamUrl)
+                if (tmp.equals(fragmentPlayerBinding.playerView.player?.currentMediaItem)) {
                     val model: MusicModel = musicAdapter.currentList.get(index - 1)
                     fragmentPlayerBinding.playerView.player?.setMediaItem(MediaItem.fromUri(model.streamUrl))
                     fragmentPlayerBinding.playerView.player?.prepare()
@@ -168,6 +162,23 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
 
                 }
             })
+        }
+    }
+
+    private fun playMusic(item: MusicModel) {
+        //TODO: Player UI Binding
+
+        binding?.let {
+            it.titleTextView.text = item.track
+            it.artistTextView.text = item.artist
+            Glide.with(it.coverImageView.context)
+                .load(item.cover)
+                .into(it.coverImageView)
+
+            it.playerView.player?.setMediaItem(MediaItem.fromUri(item.streamUrl))
+            it.playerView.player?.prepare()
+            it.playerView.player?.play()
+            item.isPlaying = true
         }
     }
 
