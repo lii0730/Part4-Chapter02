@@ -12,8 +12,9 @@ fun PlayListItem.mapper(id: Long): MusicModel =
         artist = artist
     )
 
-fun MusicDTO.mapper(): PlayerModel = PlayerModel(
-    playMusicList = musics.mapIndexed { index, playListItem ->
-        playListItem.mapper(index.toLong())
-    }
-)
+fun MusicDTO.mapper(): PlayerModel =
+    PlayerModel(
+        playMusicList = musics.mapIndexed { index, playListItem ->
+            playListItem.mapper(index.toLong())
+        }
+    )

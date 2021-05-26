@@ -15,8 +15,6 @@ import com.bumptech.glide.Glide
 class PlayListAdapter(val onItemClicked: (MusicModel) -> Unit) :
     ListAdapter<MusicModel, PlayListAdapter.ViewHolder>(diffUtil) {
 
-    private lateinit var tmp: MusicModel
-
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: MusicModel) {
             //TODO 현재 클릭된 item 정보를 tmp에 저장
@@ -30,7 +28,6 @@ class PlayListAdapter(val onItemClicked: (MusicModel) -> Unit) :
             Glide.with(thumbnailImageView.context)
                 .load(Uri.parse(item.cover))
                 .into(thumbnailImageView)
-
 
             //todo: 아이템 재생 상태를 바꾸고 notify 해주는 형태?
             if (item.isPlaying) {

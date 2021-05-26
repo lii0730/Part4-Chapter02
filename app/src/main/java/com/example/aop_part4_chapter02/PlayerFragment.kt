@@ -27,6 +27,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
     private var binding: FragmentPlayerBinding? = null
     private var model: PlayerModel = PlayerModel()
     private lateinit var player: SimpleExoPlayer
+
     private val updateSeekRunnable = Runnable {
         updateSeek()
     }
@@ -72,8 +73,9 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
                 player.seekTo((seekBar.progress * 1000).toLong())
             }
         })
-        fragmentPlayerBinding.playListSeekBar.setOnTouchListener { v, event ->
-            false
+
+        fragmentPlayerBinding.playListSeekBar.setOnTouchListener { _, _ ->
+            true
         }
     }
 
@@ -99,7 +101,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
 
                     val newIndex = mediaItem?.mediaId ?: return
                     model.currentPosition = newIndex.toInt()
-                    updatePlyerView(model.currentMusicModel())
+                    updatePlayerView(model.currentMusicModel())
 
                     musicAdapter.submitList(model.getAdapterModels())
                 }
@@ -117,7 +119,8 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
         val player = this.player
 
         // duration = 재생중인 아이템의 전체 길이
-        val duration = if (player.duration >= 0) player.duration else 0
+        val duration = if (player.duration > 0) player.duration else 0
+        // position = 현재 재생 위치
         val position = player.currentPosition
 
         updateSeekUI(duration, position)
@@ -125,6 +128,7 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
         val state = player.playbackState
         view?.removeCallbacks(updateSeekRunnable)
         if (state != Player.STATE_IDLE && state != Player.STATE_ENDED) {
+            // 핸들러에 10초마다 Runnable 전송
             view?.postDelayed(updateSeekRunnable, 1000)
         }
     }
@@ -138,18 +142,24 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
 
             binding.playTimeTextView.text = String.format(
                 "%02d:%02d",
-                TimeUnit.MINUTES.convert(position, TimeUnit.MILLISECONDS),
-                (position / 1000) % 60
+                TimeUnit.MINUTES.convert(
+                    position,
+                    TimeUnit.MILLISECONDS
+                ), // 현재 position 의 MILLISECONDS 를 MINUTE 으로 변환
+                (position / 1000) % 60 // 초로 변환
             )
             binding.totalTimeTextView.text = String.format(
                 "%02d:%02d",
-                TimeUnit.MINUTES.convert(duration, TimeUnit.MILLISECONDS),
-                (duration / 1000) % 60
+                TimeUnit.MINUTES.convert(
+                    duration,
+                    TimeUnit.MILLISECONDS
+                ), // 전체 duration 의 MILLISECONDS 를 MINUTE 으로 변환
+                (duration / 1000) % 60 // 초로 변환
             )
         }
     }
 
-    private fun updatePlyerView(currentMusicModel: MusicModel?) {
+    private fun updatePlayerView(currentMusicModel: MusicModel?) {
         currentMusicModel ?: return
 
         binding?.let { binding ->
@@ -193,53 +203,24 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
 
     private fun initPlayBottomControlButton(fragmentPlayerBinding: FragmentPlayerBinding) {
         fragmentPlayerBinding.playControlImageView.setOnClickListener {
-            if (fragmentPlayerBinding.playerView.player?.isPlaying!!) {
-                fragmentPlayerBinding.playerView.player?.pause()
+
+            val player = this.player
+
+            if (player.isPlaying) {
+                player.pause()
             } else {
-                fragmentPlayerBinding.playerView.player?.play()
+                player.play()
             }
         }
 
         fragmentPlayerBinding.skipNextImageView.setOnClickListener {
             val nextMusic = model.nextMusic() ?: return@setOnClickListener
             playMusic(nextMusic)
-//            musicAdapter.currentList.forEachIndexed { index, musicModel ->
-//                val tmp: MediaItem = MediaItem.fromUri(musicModel.streamUrl)
-//                if (tmp.equals(fragmentPlayerBinding.playerView.player?.currentMediaItem)) {
-//                    val model: MusicModel = musicAdapter.currentList.get(index + 1)
-//                    fragmentPlayerBinding.playerView.player?.setMediaItem(MediaItem.fromUri(model.streamUrl))
-//                    fragmentPlayerBinding.playerView.player?.prepare()
-//                    fragmentPlayerBinding.playerView.player?.play()
-//
-//                    fragmentPlayerBinding.titleTextView.text = model.track
-//                    fragmentPlayerBinding.artistTextView.text = model.artist
-//                    Glide.with(fragmentPlayerBinding.coverImageView)
-//                        .load(model.cover)
-//                        .into(fragmentPlayerBinding.coverImageView)
-//                    return@setOnClickListener
-//                }
-//            }
         }
 
         fragmentPlayerBinding.skipPrevImageView.setOnClickListener {
             val prevMusic = model.prevMusic() ?: return@setOnClickListener
             playMusic(prevMusic)
-//            musicAdapter.currentList.forEachIndexed { index, musicModel ->
-//                val tmp: MediaItem = MediaItem.fromUri(musicModel.streamUrl)
-//                if (tmp.equals(fragmentPlayerBinding.playerView.player?.currentMediaItem)) {
-//                    val model: MusicModel = musicAdapter.currentList.get(index - 1)
-//                    fragmentPlayerBinding.playerView.player?.setMediaItem(MediaItem.fromUri(model.streamUrl))
-//                    fragmentPlayerBinding.playerView.player?.prepare()
-//                    fragmentPlayerBinding.playerView.player?.play()
-//
-//                    fragmentPlayerBinding.titleTextView.text = model.track
-//                    fragmentPlayerBinding.artistTextView.text = model.artist
-//                    Glide.with(fragmentPlayerBinding.coverImageView)
-//                        .load(model.cover)
-//                        .into(fragmentPlayerBinding.coverImageView)
-//                    return@setOnClickListener
-//                }
-//            }
         }
     }
 
@@ -261,7 +242,6 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
                         musicAdapter.submitList(model.getAdapterModels())
                     }
                 }
-
                 override fun onFailure(call: Call<MusicDTO>, t: Throwable) {
 
                 }
@@ -270,22 +250,23 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
     }
 
     private fun playMusic(item: MusicModel) {
-        //TODO: Player UI Binding
-
+        //todo: 클릭한 item 으로 현재 위치 설정
         model.updateCurrentPosition(item)
         player.seekTo(model.currentPosition, 0)
         player.play()
     }
 
     private fun setMusicList(modelList: List<MusicModel>) {
+        //todo: PlayList 생성
         context?.let {
-            player?.addMediaItems(modelList.map { musicModel ->
+            //todo: ModelList 를 MediaItem 으로 가공
+            player.addMediaItems(modelList.map { musicModel ->
                 MediaItem.Builder()
-                    .setMediaId(musicModel.id.toString())
+                    .setMediaId(musicModel.id.toString()) // PlayList Index 로 설정
                     .setUri(musicModel.streamUrl)
                     .build()
             })
-            player?.prepare()
+            player.prepare()
         }
     }
 

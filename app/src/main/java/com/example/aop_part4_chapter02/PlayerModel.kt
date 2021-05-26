@@ -15,6 +15,10 @@ data class PlayerModel(
     }
 
     fun updateCurrentPosition(musicModel: MusicModel){
+        if(playMusicList[currentPosition].id == musicModel.id) {
+            //TODO: 같은 item 클릭시 예외처리
+            return
+        }
         currentPosition = playMusicList.indexOf(musicModel)
     }
 
@@ -22,18 +26,18 @@ data class PlayerModel(
         if(playMusicList.isEmpty()) return null
 
         currentPosition = if((currentPosition + 1) == playMusicList.size) 0 else currentPosition + 1
-        return playMusicList.get(currentPosition)
+        return playMusicList[currentPosition]
     }
 
     fun prevMusic(): MusicModel? {
         if(playMusicList.isEmpty()) return null
         currentPosition = if((currentPosition - 1) < 0) playMusicList.lastIndex else currentPosition - 1
-        return playMusicList.get(currentPosition)
+        return playMusicList[currentPosition]
     }
 
     fun currentMusicModel() : MusicModel? {
         if(playMusicList.isEmpty()) return null
 
-        return playMusicList.get(currentPosition)
+        return playMusicList[currentPosition]
     }
 }
